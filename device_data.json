@@ -1,0 +1,27 @@
+[
+    {
+        "device_id": "1",
+        "device_name": "ROG",
+        "ip": "192.168.29.63"
+    },
+    {
+        "device_id": "2",
+        "device_name": "Narzo50",
+        "ip": "192.168.29.216"
+    },
+    {
+        "device_id": "3",
+        "device_name": "6A",
+        "ip": "192.168.29.200"
+    },
+    {
+        "device_id": "4",
+        "device_name": "Tab A7",
+        "ip": "192.168.29.81"
+    },
+    {
+        "device_id": "5",
+        "device_name": "N55",
+        "ip": "192.168.29.134"
+    }
+]
