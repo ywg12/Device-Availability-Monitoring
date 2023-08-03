@@ -6,6 +6,7 @@ from pythonping import ping
 from .availability_data import AvailabilityData
 from .device_data import DeviceData
 from .commands import CommandHandler
+from .utility import ErrorLogger
 
 ping_interval = 300  # 5 minutes
 
@@ -32,7 +33,8 @@ class DeviceMonitor:
         """        
         self.availability_data = AvailabilityData(availability_file)
         self.device_data = DeviceData(device_file)
-        self.command_handler = CommandHandler()
+        self.command_handler = CommandHandler() 
+        self.ErrorLogger = ErrorLogger()    
 
     def ping_devices(self):
         """
@@ -86,16 +88,22 @@ class DeviceMonitor:
                     print("You need to enter this command followed by an IP address")
             else:
                 print("Invalid Command")
-                print("""----------------------------------------------------------------------------------
-The following commands are executable.
-list-devices -> To list the existing devices
-add-device -> To add a new device
-delete-device <device_id> -> To delete a device
-edit-device <device_id> -> To edit a device config""")
+                print("----------------------------------------------------------------------------------")
+                print("The following commands are executable.")
+                print("list-devices -> To list the existing devices.")
+                print("add-device -> To add a new device.")
+                print("delete-device <device_id> -> To delete a device.")
+                print("edit-device <device_id> -> To edit a device config.")
+                ErrorLogger.log_custom_error("User entered an invalid command or incomplete command.")
+                
         else:
-            while True:
-                self.ping_devices()
-                time.sleep(ping_interval)
+            try:
+                while True:
+                    self.ping_devices()
+                    time.sleep(ping_interval)
+            except KeyboardInterrupt as e:
+                self.ErrorLogger.log_error(f"An error occurred: {str(e)}")
+                print("The operation was interrupted by user through keystroke")
 
 if __name__ == '__main__':
     device_monitor = DeviceMonitor("availability_data.csv", "device_data.json")
