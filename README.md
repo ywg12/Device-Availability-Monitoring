@@ -27,7 +27,7 @@ The application has the following added functionalities:
 * Ping Command
 * Error Logging
 * List Devices in a Tabular Format
-* IP Validation
+* IP Validations
 
 ## Commands
 These section contains all the commands that are required to run the application.
