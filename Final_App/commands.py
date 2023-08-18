@@ -1,7 +1,7 @@
 import json
 from pythonping import ping
 from tabulate import tabulate
-from .utility import IPUtility, ErrorLogger
+from .utility import IPUtility
 
 class CommandHandler:
     def list_devices(self, device_data):
@@ -23,7 +23,6 @@ class CommandHandler:
         for device in device_data:
             if device['device_id'] == device_id:
                 print("Device ID already exists.")
-                ErrorLogger.log_custom_error("User entered a device ID that already exists.")
                 return
         device_name = input("Enter device name: ")
         ip_address = input("Enter IP address: ")
@@ -40,7 +39,6 @@ class CommandHandler:
             print("Device added successfully.")
         else:
             print("Invalid IP")
-            ErrorLogger.log_custom_error("User entered an invalid IP.")
 
     def delete_device(self, device_data, device_id):
         """
@@ -55,7 +53,6 @@ class CommandHandler:
                 return
 
         print("Device ID not found.")
-        ErrorLogger.log_custom_error("User entered a device ID that does not exist.")
 
     def edit_device(self, device_data, device_id):
         """
@@ -72,11 +69,9 @@ class CommandHandler:
                     return
                 else:
                     print("Invalid IP")
-                    ErrorLogger.log_custom_error("User entered an invalid IP.")
                     return
 
         print("Device ID not found.")
-        ErrorLogger.log_custom_error("User entered a device ID that does not exist.")
           
     def ping_device(self, ip):
         """
