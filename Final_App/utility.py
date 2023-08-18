@@ -1,4 +1,5 @@
 import ipaddress
+import logging
 
 class IPUtility:
     @staticmethod
@@ -12,3 +13,18 @@ class IPUtility:
             return True
         except ValueError:
             return False
+class ErrorLogger:
+    def __init__(self, log_file='error_log.log'):
+        logging.basicConfig(
+            level=logging.ERROR,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            filename=log_file,
+            filemode='a'
+        )
+
+    @staticmethod
+    def log_error(error_message):
+        logging.error(error_message, exc_info=True)
+        
+    def log_custom_error(custom_error_message):
+        logging.error(f"Error: {custom_error_message}")        
